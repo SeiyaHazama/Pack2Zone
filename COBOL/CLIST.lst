@@ -1,0 +1,48 @@
+GnuCOBOL 3.1.2.0        cobol/COMP3001.cbl   Fri Dec 31 11:52:50 2021  Page 0001
+
+LINE    PG/LN  A...B............................................................
+
+000001        ******************************************************************
+000002        *  OVERVIEW: THIS PGM IS WRITE PACK VAR ON OUT TAPE.             *
+000003        ******************************************************************
+000004        *--1----+----2----+----3----+----4----+----5----+----6----+----7--
+000005          IDENTIFICATION  DIVISION.
+000006             PROGRAM-ID. COMP3001.
+000007             AUTHOR.     ZAMA_8722.
+000008          ENVIRONMENT     DIVISION.
+000009          INPUT-OUTPUT    SECTION.
+000010          FILE-CONTROL.
+000011             SELECT  OUT-TP  ASSIGN  TO  'OUT-TP.dat'.
+000012          DATA            DIVISION.
+000013          FILE            SECTION.
+000014        *--  OUTPUT TAPE.
+000015             FD      OUT-TP.
+000016             01      TP-REC.
+000017               02    ZONEAREA  PICTURE 9(10).
+000018               02    PACKAREA  PICTURE 9(10) COMP-3.
+000019               02    KANAAREA  PICTURE X(9).
+000020          WORKING-STORAGE SECTION.
+000021        *--  COMP-3 CONST VARIABLE.
+000022             01      VARIABLE.
+000023               02    FILLER  PICTURE 9(10)
+000024                             VALUE 1234567890.
+000025               02    FILLER  PICTURE 9(10) COMP-3
+000026                             VALUE 1234567890.
+000027               02    FILLER  PICTURE X(9)
+000028                             VALUE 'あいう'.
+000029          PROCEDURE       DIVISION.
+000030          MAIN            SECTION.
+000031          MAIN-S.
+000032        *--  TAPE OPEN.
+000033             OPEN  OUTPUT  OUT-TP.
+000034        *--  WRITE PACK VARIABLE.
+000035             MOVE  VARIABLE  TO  TP-REC.
+000036             WRITE TP-REC.
+000037        *--  TAPE CLOSE.
+000038             CLOSE OUT-TP.
+000039          MAIN-E.
+000040             STOP RUN.
+
+
+0 warnings in compilation group
+0 errors in compilation group
